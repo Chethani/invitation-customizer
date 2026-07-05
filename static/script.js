@@ -28,6 +28,8 @@ async function updateCustomizedPreview() {
   formData.append("invitation_template", templateFile);
 
   try {
+    alert("Calling preview"); // temporary debugging
+
     const response = await fetch(PREVIEW_ENDPOINT, {
       method: "POST",
       body: formData,
@@ -44,6 +46,7 @@ async function updateCustomizedPreview() {
     templatePreview.hidden = false;
     previewPlaceholder.hidden = true;
   } catch (error) {
+    alert(error.name + ": " + error.message); // temporary debugging
     if (error.name !== "AbortError") showUploadError("Couldn’t generate the customized preview.");
   }
 }
@@ -181,6 +184,8 @@ form.addEventListener("submit", async (event) => {
   result.hidden = false;
 
   try {
+    alert("Calling generate"); // temporary debugging
+
     const formData = new FormData();
     formData.append("guest_list", guestInput.files[0]);
     formData.append("invitation_template", templateInput.files[0]);
@@ -209,6 +214,9 @@ form.addEventListener("submit", async (event) => {
     retryButton.hidden = true;
   } catch (error) {
     result.className = "action-status error";
+
+    alert(error.name + ": " + error.message); // temporary debugging
+
     resultTitle.textContent = `${error.message} Make sure the FastAPI server is running.`;
     retryButton.textContent = "Try Again";
     retryButton.hidden = false;
