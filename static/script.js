@@ -1,4 +1,5 @@
 const API_ENDPOINT = "/generate";
+const PREVIEW_ENDPOINT = "/preview";
 
 const form = document.querySelector("#generator-form");
 const guestInput = document.querySelector("#guest-list");
@@ -27,7 +28,7 @@ async function updateCustomizedPreview() {
   formData.append("invitation_template", templateFile);
 
   try {
-    const response = await fetch("/preview", {
+    const response = await fetch(PREVIEW_ENDPOINT, {
       method: "POST",
       body: formData,
       signal: previewRequestController.signal,
